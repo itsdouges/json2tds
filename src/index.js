@@ -40,7 +40,7 @@ function generate() {
     generateItem(file, template, parent, {
       destination,
       revision: revision.value,
-      createdBy: 'json2tds',
+      createdBy: 'sitecore\\json2tds',
     });
   });
 }
