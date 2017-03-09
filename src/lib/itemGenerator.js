@@ -13,6 +13,17 @@ content-length: ${data.contentLength}
 
 ${data.value || ''}`;
 
+function addToProject(data) {
+  const projectField = `<SitecoreItem Include="${data.path}\\${data.name}.item">
+  <Icon>/temp/IconCache/${data.icon}</Icon>
+  <ItemDeployment>DeployOnce</ItemDeployment>
+  <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
+</SitecoreItem>
+`;
+
+
+}
+
 export default function itemGenerator(data, template, parent, {
   destination,
   revision,

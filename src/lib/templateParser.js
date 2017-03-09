@@ -1,7 +1,11 @@
+const defaultTemplate = {
+  id: '{1930BBEB-7805-471A-A3BE-4858AC7CF696}',
+  name: 'Standard Template',
+  icon: 'Applications/16x16/form_blue.png',
+};
+
 export default function parseTemplate(path) {
   return {
-    id: '{1111-111-111-111-11}',
-    name: 'Template',
-    icon: 'Network/16x16/earth.png',
+    ...defaultTemplate,
   };
 }

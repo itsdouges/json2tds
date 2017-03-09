@@ -1,5 +1,5 @@
 {
   "name": "Another Item",
-  "sortOrder": 1,
+  "sortOrder": 2,
   "templatePath": "test/templates/Simple Item.item"
 }

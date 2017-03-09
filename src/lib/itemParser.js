@@ -1,10 +1,8 @@
-import guid from 'guid';
-
 export default function parseItem(path) {
   return {
-    id: `{${guid.create().value}}`,
+    id: '{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}',
     name: 'Home',
     path: '/sitecore/content/Home',
-    icon: 'Network/16x16/earth.png',
+    icon: 'Applications/16x16/form_blue.png',
   };
 }
