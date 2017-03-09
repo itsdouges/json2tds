@@ -5,6 +5,7 @@ root/
     ITEMNAME (folder, optional if has children)
 
 EACH ITEM HAS FIELDS
+EVERY FOLDER IS AN ITEM
 
 ----item----
 version: 1
