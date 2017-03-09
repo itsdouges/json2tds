@@ -1,5 +1,9 @@
 import fs from 'fs';
 import guid from 'guid';
+import { DOMParser, XMLSerializer } from 'xmldom';
+import _ from 'lodash';
+
+import findUpTree from './findUpTree';
 
 const parseDateTimeString = str => str.replace(/:/g, '').replace(/-/g, '').replace('Z', '').replace('.', ':');
 
@@ -13,15 +17,41 @@ content-length: ${data.contentLength}
 
 ${data.value || ''}`;
 
-function addToProject(data) {
-  const projectField = `<SitecoreItem Include="${data.path}\\${data.name}.item">
+function addToProject(data, path, parentPath) {
+  const { data: xml, filePath } = findUpTree(path, '.scproj');
+  const parser = new DOMParser();
+  const xmlDom = parser.parseFromString(xml, 'text/xml');
+
+  const includeName = `${parentPath}/${data.name}.item`.replace(/\/+/g, '\\').replace('\\', '');
+
+  const nodes = Array.from(xmlDom.getElementsByTagName('SitecoreItem'));
+
+  for (let i = 0; i < nodes.length; i += 1) {
+    const node = nodes[i];
+
+    if (includeName === node.getAttribute('Include')) {
+      // Exists, bail out!
+      return;
+    }
+  }
+
+  const newNodeString = `<SitecoreItem Include="${includeName}">
   <Icon>/temp/IconCache/${data.icon}</Icon>
   <ItemDeployment>DeployOnce</ItemDeployment>
   <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
 </SitecoreItem>
 `;
 
+  const newNode = parser.parseFromString(newNodeString, 'text/xml');
 
+  // console.log(newNode);
+
+  const lastNode = _.last(nodes);
+  lastNode.parentNode.appendChild(newNode);
+  // Ok doesnt exist, lets add it to project!
+
+  const newXml = new XMLSerializer().serializeToString(xmlDom);
+  fs.writeFileSync(filePath, newXml);
 }
 
 export default function itemGenerator(data, template, parent, {
@@ -99,4 +129,9 @@ ${field({
 `;
 
   fs.writeFileSync(`${destination}/${data.name}.item`, item);
+
+  addToProject({
+    ...data,
+    icon: template.icon,
+  }, destination, parent.path);
 }
