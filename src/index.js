@@ -30,8 +30,7 @@ function generate() {
 
   const revision = guid.create();
 
-  const parentPath = destination.split('/').slice(0, -1).join('/');
-  const parent = parseItem(parentPath);
+  const parent = parseItem(`${destination}.item`);
 
   const files = readAllFiles(source);
   files.forEach((file) => {

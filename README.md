@@ -4,5 +4,5 @@
 
 ### Simple Items
 ```
-npm start -- --dist=dist/Root --src=test/1-simple-item/
+npm start -- --dist=test/sitecore/content/Home --src=test/1-simple-item/
 ```

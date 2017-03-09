@@ -30,7 +30,7 @@ parent: ${parent.id}
 name: ${data.name}
 master: {00000000-0000-0000-0000-000000000000}
 template: ${template.id}
-templatekey:${template.name}
+templatekey: ${template.name}
 
 ${createKey('version')}
 language: en
