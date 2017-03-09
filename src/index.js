@@ -1,8 +1,10 @@
-// @flow
-
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
+import guid from 'guid';
+
 import generateItem from './lib/itemGenerator';
+import parseTemplate from './lib/templateParser';
+import parseItem from './lib/itemParser';
 
 const argv = require('yargs')
   .string('dist')
@@ -24,8 +26,23 @@ function readAllFiles(src) {
 }
 
 function generate() {
+  fs.ensureDirSync(destination);
+
+  const revision = guid.create();
+
+  const parentPath = destination.split('/').slice(0, -1).join('/');
+  const parent = parseItem(parentPath);
+
   const files = readAllFiles(source);
-  files.forEach(file => generateItem(file, { destination }));
+  files.forEach((file) => {
+    const template = parseTemplate(file.templatePath);
+
+    generateItem(file, template, parent, {
+      destination,
+      revision: revision.value,
+      createdBy: 'json2tds',
+    });
+  });
 }
 
 generate();

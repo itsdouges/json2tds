@@ -1282,6 +1282,13 @@ form-data@~2.1.1:
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
 
+fs-extra@^2.0.0:
+  version "2.0.0"
+  resolved "http://npm.9msn.net:4873/fs-extra/-/fs-extra-2.0.0.tgz#337352bded4a0b714f3eb84de8cea765e9d37600"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^2.1.0"
+
 fs-readdir-recursive@^1.0.0:
   version "1.0.0"
   resolved "http://npm.9msn.net:4873/fs-readdir-recursive/-/fs-readdir-recursive-1.0.0.tgz#8cd1745c8b4f8a29c8caec392476921ba195f560"
@@ -1390,13 +1397,17 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-graceful-fs@^4.1.2, graceful-fs@^4.1.4:
+graceful-fs@^4.1.2, graceful-fs@^4.1.4, graceful-fs@^4.1.6:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
 "graceful-readlink@>= 1.0.0":
   version "1.0.1"
   resolved "http://npm.9msn.net:4873/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
+
+guid@^0.0.12:
+  version "0.0.12"
+  resolved "http://npm.9msn.net:4873/guid/-/guid-0.0.12.tgz#9137c52b185f7de12490b9bebcc1660b9025fe0c"
 
 har-schema@^1.0.5:
   version "1.0.5"
@@ -1708,6 +1719,16 @@ json5@^0.5.0:
   version "0.5.1"
   resolved "http://npm.9msn.net:4873/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
+jsonfile@^2.1.0:
+  version "2.4.0"
+  resolved "http://npm.9msn.net:4873/jsonfile/-/jsonfile-2.4.0.tgz#3736a2b428b87bbda0cc83b53fa3d633a35c2ae8"
+  optionalDependencies:
+    graceful-fs "^4.1.6"
+
+jsonfile@~1.1.0:
+  version "1.1.1"
+  resolved "http://npm.9msn.net:4873/jsonfile/-/jsonfile-1.1.1.tgz#da4fd6ad77f1a255203ea63c7bc32dc31ef64433"
+
 jsonify@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
@@ -1831,6 +1852,10 @@ minimist@^1.2.0:
   version "1.2.0"
   resolved "http://npm.9msn.net:4873/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
 
+mkdirp@0.3.x:
+  version "0.3.5"
+  resolved "http://npm.9msn.net:4873/mkdirp/-/mkdirp-0.3.5.tgz#de3e5f8961c88c787ee1368df849ac4413eca8d7"
+
 "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
@@ -1856,6 +1881,19 @@ nan@^2.3.0:
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
+
+ncp@~0.4.2:
+  version "0.4.2"
+  resolved "http://npm.9msn.net:4873/ncp/-/ncp-0.4.2.tgz#abcc6cbd3ec2ed2a729ff6e7c1fa8f01784a8574"
+
+node-fs-extra@^0.8.1:
+  version "0.8.1"
+  resolved "http://npm.9msn.net:4873/node-fs-extra/-/node-fs-extra-0.8.1.tgz#7ce3c1b8835d5d7dfe2d09123470d81f620da86b"
+  dependencies:
+    jsonfile "~1.1.0"
+    mkdirp "0.3.x"
+    ncp "~0.4.2"
+    rimraf "~2.2.0"
 
 node-pre-gyp@^0.6.29:
   version "0.6.33"
@@ -2282,6 +2320,10 @@ rimraf@2, rimraf@^2.2.8, rimraf@~2.5.1, rimraf@~2.5.4:
   resolved "http://npm.9msn.net:4873/rimraf/-/rimraf-2.5.4.tgz#96800093cbf1a0c86bd95b4625467535c29dfa04"
   dependencies:
     glob "^7.0.5"
+
+rimraf@~2.2.0:
+  version "2.2.8"
+  resolved "http://npm.9msn.net:4873/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
 
 run-async@^0.1.0:
   version "0.1.0"
