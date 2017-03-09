@@ -15,7 +15,7 @@ const {
 } = argv;
 
 function readAllFiles(src) {
-  const sourcePath = path.resolve(__dirname, '..', src);
+  const sourcePath = path.resolve(src);
 
   const files = fs.readdirSync(sourcePath).sort();
 

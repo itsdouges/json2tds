@@ -1,5 +1,7 @@
 // @flow
 
+import fs from 'fs';
+
 type Options = {
   destination: string,
 };
