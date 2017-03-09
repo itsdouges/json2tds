@@ -1,4 +1,5 @@
 import fs from 'fs';
+import _ from 'lodash';
 
 export default function parseItem(path) {
 
@@ -17,15 +18,14 @@ export default function parseItem(path) {
         const value = keyValuePair[1];
 
         if (key && value) {
-          fields[key] = value;
+          fields[_.camelCase(key)] = value;
         }
         else {
-          fields['value'] = key;
+          fields.value = key;
         }
       }
     });
 	  jsonFields.push(fields);
-    console.log(jsonFields);
   });
 
   return {
