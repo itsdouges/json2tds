@@ -1,5 +1,6 @@
 node_modules
 build
 dist
+<<<<<<< 43e414a8ec3256907a05f80b8d1278146eec52a7
 test/sitecore/**/*.item
 *.log
