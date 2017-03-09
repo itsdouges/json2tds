@@ -39,8 +39,7 @@ function addToProject(data, path, parentPath) {
   <Icon>/temp/IconCache/${data.icon}</Icon>
   <ItemDeployment>DeployOnce</ItemDeployment>
   <ChildItemSynchronization>AlwaysUpdate</ChildItemSynchronization>
-</SitecoreItem>
-`;
+</SitecoreItem>`;
 
   const newNode = parser.parseFromString(newNodeString, 'text/xml');
   const lastNode = _.last(nodes);
