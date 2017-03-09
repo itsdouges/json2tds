@@ -1,0 +1,22 @@
+{
+  "name": "@nec/json2tds",
+  "version": "1.0.0",
+  "description": "Bored at creating tds items in your sitecore then sync up with your tds project? This will allow you to define sitecore items in JSON and then as a build step produce TDS items.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node './src/index.js",
+    "lint": "eslint ."
+  },
+  "author": "@madou",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.17.1",
+    "eslint-config-mi9": "^5.1.0",
+    "eslint-plugin-flowtype": "^2.30.3",
+    "flow-bin": "^0.41.0"
+  }
+}
