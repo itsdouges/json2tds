@@ -38,18 +38,15 @@ function addToProject(data, path, parentPath) {
   const newNodeString = `<SitecoreItem Include="${includeName}">
   <Icon>/temp/IconCache/${data.icon}</Icon>
   <ItemDeployment>DeployOnce</ItemDeployment>
-  <ChildItemSynchronization>NoChildSynchronization</ChildItemSynchronization>
+  <ChildItemSynchronization>AlwaysUpdate</ChildItemSynchronization>
 </SitecoreItem>
 `;
 
   const newNode = parser.parseFromString(newNodeString, 'text/xml');
-
-  // console.log(newNode);
-
   const lastNode = _.last(nodes);
   lastNode.parentNode.appendChild(newNode);
-  // Ok doesnt exist, lets add it to project!
 
+  // Ok doesnt exist, lets add it to project!
   const newXml = new XMLSerializer().serializeToString(xmlDom);
   fs.writeFileSync(filePath, newXml);
 }

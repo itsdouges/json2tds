@@ -19,7 +19,7 @@ export default function findUpTree(startPath, extension) {
         // eslint-disable-next-line
         return {
           data: fs.readFileSync(filePath).toString(),
-          filePath: currentPath,
+          filePath,
         };
       }
     }
