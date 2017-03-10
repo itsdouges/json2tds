@@ -30,7 +30,12 @@ function generate() {
 
   const revision = guid.create();
 
-  const parent = parseItem(`${destination}.item`);
+  const parentPath = `${destination}.item`;
+  const parent = parseItem(parentPath);
+
+  if (!parent || Object.keys(parent).length === 0) {
+    throw new Error(`Parent wasnt found at: ${parentPath}`);
+  }
 
   const files = readAllFiles(source);
   files.forEach((file) => {

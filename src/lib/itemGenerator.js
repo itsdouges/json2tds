@@ -55,7 +55,7 @@ function addFields(data, template) {
     return '';
   }
 
-  return template.fields.reduce((str, templateField) => {
+  const fields = template.fields.reduce((str, templateField) => {
     let string = str;
     const dataKey = _.camelCase(templateField.name);
     const dataValue = data.fields[dataKey];
@@ -66,11 +66,14 @@ function addFields(data, template) {
         name: templateField.name,
         key: templateField.name.toLowerCase(),
         contentLength: dataValue.length,
+        value: dataValue,
       });
     }
 
     return string;
   }, '');
+
+  return `${fields}\n`;
 }
 
 export default function itemGenerator(data, template, parent, {

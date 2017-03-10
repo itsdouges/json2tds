@@ -2,9 +2,8 @@ import fs from 'fs';
 import _ from 'lodash';
 
 export default function parseItem(path) {
-
-  const data = fs.readFileSync(path, 'utf8')
-  const fieldsString = data.toString().replace(/\n/g, ',').split(/----\S+----,/);
+  const data = fs.readFileSync(path, 'utf8');
+  const fieldsString = data.toString().replace(/\r?\n/g, ',').split(/----\S+----,/);
   const jsonFields = [];
 
   fieldsString.forEach((field) => {
@@ -12,24 +11,24 @@ export default function parseItem(path) {
     const fields = {};
     listOfValues.forEach((row) => {
       if (row) {
-        const keyValuePair = row.split(': ');
-        const key = keyValuePair[0];
-        const value = keyValuePair[1];
-
+        const [key, value] = row.split(': ');
         if (key && value) {
           fields[_.camelCase(key)] = value;
-        }
-        else {
+        } else {
           fields.value = key;
         }
       }
     });
+
     jsonFields.push(fields);
   });
 
+  const [baseData] = jsonFields.filter(field => !!field.database);
   const itemJson = {
-    ...jsonFields[1]
+    ...baseData,
   };
+
+  console.log(jsonFields);
 
   jsonFields.slice(2).forEach((field) => {
     if (field.key) {

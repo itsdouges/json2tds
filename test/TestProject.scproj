@@ -68,6 +68,18 @@
       <ChildItemSynchronization>KeepAllChildrenSynchronized</ChildItemSynchronization>
       <ItemDeployment>AlwaysUpdate</ItemDeployment>
     </SitecoreItem>
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\HedgehogDevelopment\SitecoreProject\v9.0\HedgehogDevelopment.SitecoreProject.targets" />
+  <SitecoreItem Include="sitecore\content\Home\Home.item">
+  <Icon>/temp/IconCache/Control/32x32/button_b_h.png</Icon>
+  <ItemDeployment>DeployOnce</ItemDeployment>
+  <ChildItemSynchronization>AlwaysUpdate</ChildItemSynchronization>
+</SitecoreItem><SitecoreItem Include="sitecore\content\Home\Cool Link To Home.item">
+  <Icon>/temp/IconCache/Control/32x32/button_b_h.png</Icon>
+  <ItemDeployment>DeployOnce</ItemDeployment>
+  <ChildItemSynchronization>AlwaysUpdate</ChildItemSynchronization>
+</SitecoreItem><SitecoreItem Include="pathCool Link To Home.item">
+  <Icon>/temp/IconCache/Control/32x32/button_b_h.png</Icon>
+  <ItemDeployment>DeployOnce</ItemDeployment>
+  <ChildItemSynchronization>AlwaysUpdate</ChildItemSynchronization>
+</SitecoreItem></ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\HedgehogDevelopment\SitecoreProject\v9.0\HedgehogDevelopment.SitecoreProject.targets"/>
 </Project>
