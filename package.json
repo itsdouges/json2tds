@@ -12,6 +12,7 @@
     "babel-cli": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.2.1",
+    "eol": "^0.8.1",
     "fs-extra": "^2.0.0",
     "guid": "^0.0.12",
     "lodash": "^4.17.4",

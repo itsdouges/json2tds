@@ -2,8 +2,8 @@ import fs from 'fs';
 import _ from 'lodash';
 
 export default function parseTemplate(path) {
-  const data = fs.readFileSync(path, 'utf8')
-  const fieldsString = data.toString().replace(/\n/g, ',').split(/----\S+----,/);
+  const data = fs.readFileSync(path, 'utf8');
+  const fieldsString = data.toString().replace(/\r?\n/g, ',').split(/----\S+----,/);
   const jsonFields = [];
 
   fieldsString.forEach((field) => {
@@ -25,8 +25,10 @@ export default function parseTemplate(path) {
     });
     jsonFields.push(fields);
   });
+
+  const [baseData] = jsonFields.filter(field => !!field.database);
   const itemJson = {
-    ...jsonFields[1],
+    ...baseData,
     fields: [],
   };
   jsonFields.slice(2).forEach((field) => {

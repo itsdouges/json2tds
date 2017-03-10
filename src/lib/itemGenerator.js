@@ -2,7 +2,7 @@ import fs from 'fs';
 import guid from 'guid';
 import { DOMParser, XMLSerializer } from 'xmldom';
 import _ from 'lodash';
-
+import eol from 'eol';
 import findUpTree from './findUpTree';
 
 const parseDateTimeString = str => str.replace(/:/g, '').replace(/-/g, '').replace('Z', '').replace('.', ':');
@@ -35,11 +35,11 @@ function addToProject(data, path, parentPath) {
     }
   }
 
-  const newNodeString = `<SitecoreItem Include="${includeName}">
+  const newNodeString = eol.crlf(`<SitecoreItem Include="${includeName}">
   <Icon>/temp/IconCache/${data.icon}</Icon>
   <ItemDeployment>DeployOnce</ItemDeployment>
   <ChildItemSynchronization>AlwaysUpdate</ChildItemSynchronization>
-</SitecoreItem>`;
+</SitecoreItem>`);
 
   const newNode = parser.parseFromString(newNodeString, 'text/xml');
   const lastNode = _.last(nodes);
@@ -73,7 +73,8 @@ function addFields(data, template) {
     return string;
   }, '');
 
-  return `${fields}\n`;
+  return `${fields}
+`;
 }
 
 export default function itemGenerator(data, template, parent, {
@@ -150,7 +151,7 @@ ${field({
 })}
 ${addFields(data, template)}`;
 
-  fs.writeFileSync(`${destination}/${data.name}.item`, item);
+  fs.writeFileSync(`${destination}/${data.name}.item`, eol.crlf(item));
 
   addToProject({
     ...data,
