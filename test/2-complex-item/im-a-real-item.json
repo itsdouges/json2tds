@@ -4,5 +4,5 @@
   "templatePath": "test/templates/Navigation Item.item",
   "fields": {
     "linkItem": "<link text=\"Home\" linktype=\"anchor\" url=\"/\" anchor=\"/\" title=\"\" class=\"\" />"
-  },
+  }
 }

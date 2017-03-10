@@ -51,14 +51,15 @@ function addToProject(data, path, parentPath) {
 }
 
 function addFields(data, template) {
-  if (!data.fields || template.fields) {
+  if (!data.fields || !template.fields) {
     return '';
   }
 
   return template.fields.reduce((str, templateField) => {
     let string = str;
     const dataKey = _.camelCase(templateField.name);
-    const dataValue = data[dataKey];
+    const dataValue = data.fields[dataKey];
+
     if (dataValue) {
       string += field({
         id: templateField.id,
