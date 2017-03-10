@@ -9,7 +9,6 @@ export default function parseItem(path) {
 
   fieldsString.forEach((field) => {
     const listOfValues = field.split(',');
-
     const fields = {};
     listOfValues.forEach((row) => {
       if (row) {
@@ -25,13 +24,18 @@ export default function parseItem(path) {
         }
       }
     });
-	  jsonFields.push(fields);
+    jsonFields.push(fields);
   });
 
-  return {
-    id: '{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}',
-    name: 'Home',
-    path: '/sitecore/content/Home',
-    icon: 'Applications/16x16/form_blue.png',
+  const itemJson = {
+    ...jsonFields[1]
   };
+
+  jsonFields.slice(2).forEach((field) => {
+    if (field.key) {
+      itemJson[_.camelCase(field.key)] = field.value;
+    }
+  });
+
+  return itemJson;
 }
