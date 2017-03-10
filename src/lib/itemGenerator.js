@@ -50,6 +50,28 @@ function addToProject(data, path, parentPath) {
   fs.writeFileSync(filePath, newXml);
 }
 
+function addFields(data, template) {
+  if (!data.fields || template.fields) {
+    return '';
+  }
+
+  return template.fields.reduce((str, templateField) => {
+    let string = str;
+    const dataKey = _.camelCase(templateField.name);
+    const dataValue = data[dataKey];
+    if (dataValue) {
+      string += field({
+        id: templateField.id,
+        name: templateField.name,
+        key: templateField.name.toLowerCase(),
+        contentLength: dataValue.length,
+      });
+    }
+
+    return string;
+  }, '');
+}
+
 export default function itemGenerator(data, template, parent, {
   destination,
   revision,
@@ -122,7 +144,7 @@ ${field({
   contentLength: 5,
   value: '<r />',
 })}
-`;
+${addFields(data, template)}`;
 
   fs.writeFileSync(`${destination}/${data.name}.item`, item);
 
