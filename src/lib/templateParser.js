@@ -1,28 +1,8 @@
 import fs from 'fs';
 import _ from 'lodash';
 
-const defaultTemplate = {
-  id: '{1930BBEB-7805-471A-A3BE-4858AC7CF696}',
-  name: 'Standard Template',
-  icon: 'Applications/16x16/form_blue.png',
-};
-
-const navigationItemTemplate = {
-  id: '{9A323321-593C-4C34-ABB9-DD140578AF02}',
-  name: 'Navigation Item',
-  icon: 'Control/32x32/button_b_h.png',
-  fields: [{
-    id: '{D5079DF8-11B4-47E4-AFE8-F2548054C4DF}',
-    name: 'Link Item',
-  }],
-};
-
 export default function parseTemplate(path) {
-  if (path === 'src/Ninemsn.Portal.SitecoreItems.JumpIn.Master/sitecore/templates/Ninemsn/9vod/Content/Navigation Item.item') {
-    return navigationItemTemplate;
-  }
-
-  const data = fs.readFileSync(path, 'utf8');
+  const data = fs.readFileSync(path, 'utf8')
   const fieldsString = data.toString().replace(/\n/g, ',').split(/----\S+----,/);
   const jsonFields = [];
 
@@ -37,7 +17,8 @@ export default function parseTemplate(path) {
 
         if (key && value) {
           fields[_.camelCase(key)] = value;
-        } else {
+        }
+        else {
           fields.value = key;
         }
       }
@@ -48,39 +29,44 @@ export default function parseTemplate(path) {
     ...jsonFields[1],
     fields: [],
   };
-
   jsonFields.slice(2).forEach((field) => {
     if (field.key) {
       itemJson[_.camelCase(field.key)] = field.value;
     }
   });
 
-  // find folder of template name
-  const fieldFolder = 'test/templates/Navigation Item/Content/';
-  const files = fs.readdirSync(fieldFolder);
-  files.forEach((file) => {
-    const fileData = fs.readFileSync(`${fieldFolder}${file}`, 'utf8')
-      .toString().replace(/\r\n/g, ',').split(/----\S+----,/);
+  const newPath = path.split('/');
+  newPath.pop();
+  const itemFolder = `${newPath.join('/')}/${itemJson.name}`;
 
-    const metaData = fileData[1].split(',');
-    const fieldData = {};
-    metaData.forEach((row) => {
-      if (row) {
-        const keyValuePair = row.split(': ');
-        const key = keyValuePair[0];
-        const value = keyValuePair[1];
+  const contentFolders = fs.readdirSync(itemFolder).filter(folder => fs.statSync(itemFolder +"/"+ folder).isDirectory());
 
-        if (key && value) {
-          fieldData[_.camelCase(key)] = value;
-        } else {
-          fieldData.value = key;
+  contentFolders.forEach((fieldFolder) => {
+    const files = fs.readdirSync(`${itemFolder}/${fieldFolder}`);
+    files.forEach((file) => {
+      const fileData = fs.readFileSync(`${itemFolder}/${fieldFolder}/${file}`, 'utf8')
+        .toString().replace(/\r\n/g, ',').split(/----\S+----,/);
+      const metaData = fileData[1].split(',');
+      const fieldData = {};
+      metaData.forEach((row) => {
+        if (row) {
+          const keyValuePair = row.split(': ');
+          const key = keyValuePair[0];
+          const value = keyValuePair[1];
+
+          if (key && value) {
+            fieldData[_.camelCase(key)] = value;
+          } else {
+            fieldData.value = key;
+          }
         }
-      }
-    });
-    itemJson.fields.push({
-      ...fieldData,
+      });
+      itemJson.fields.push({
+        ...fieldData,
+      });
     });
   });
 
   return itemJson;
+
 }

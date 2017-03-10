@@ -28,8 +28,6 @@ export default function parseItem(path) {
     ...baseData,
   };
 
-  console.log(jsonFields);
-
   jsonFields.slice(2).forEach((field) => {
     if (field.key) {
       itemJson[_.camelCase(field.key)] = field.value;
